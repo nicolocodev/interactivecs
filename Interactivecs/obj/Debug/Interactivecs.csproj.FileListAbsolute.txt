@@ -1,0 +1,13 @@
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\bin\Debug\Interactivecs.exe.config
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\bin\Debug\Interactivecs.exe
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\bin\Debug\Interactivecs.pdb
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\obj\Debug\Interactivecs.csprojResolveAssemblyReference.cache
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\obj\Debug\MainWindow.baml
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\obj\Debug\MainWindow.g.cs
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\obj\Debug\App.g.cs
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\obj\Debug\Interactivecs_MarkupCompile.cache
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\obj\Debug\Interactivecs.g.resources
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\obj\Debug\Interactivecs.Properties.Resources.resources
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\obj\Debug\Interactivecs.csproj.GenerateResource.Cache
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\obj\Debug\Interactivecs.exe
+D:\Users\nicolocodev\Documents\Desarrollos\Windows Dev\Interactivecs\Interactivecs\obj\Debug\Interactivecs.pdb
