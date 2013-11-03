@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -14,46 +16,45 @@ namespace Interactivecs
     /// </summary>
     public partial class MainWindow
     {
-        private readonly string[] _defaultNamespaces;
-        private readonly ScriptEngine _scriptEngine;
         private readonly Session _session;
         private string _currentDirectory;
         private FlowDocument _flowDocument;
         private object _result;
 
-
         public MainWindow()
         {
-            _scriptEngine = new ScriptEngine();
-            _session = _scriptEngine.CreateSession();
-            _scriptEngine.CreateSession();
-            _defaultNamespaces = new[] {"System"};
-            foreach (string defaultNamespace in _defaultNamespaces)
-                //_session.ImportNamespace(defaultNamespace);
-                InitializeComponent();
+            InitializeComponent();
+            var scriptEngine = new ScriptEngine();
+            _session = scriptEngine.CreateSession();
+            _session.AddReference("System");
+            _session.AddReference("System.Core");
             Loaded += MainWindowsLoaded;
         }
 
         private void MainWindowsLoaded(object sender, RoutedEventArgs e)
         {
-            _currentDirectory = string.Format("{0}>",
-                                              Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+            _currentDirectory = ">";
             _flowDocument = new FlowDocument();
             _flowDocument.Blocks.Add(new Paragraph(new Run(_currentDirectory)));
             richTextBoxPrincipal.Document = _flowDocument;
+            var observable = Observable.FromEventPattern<KeyEventHandler, KeyEventArgs>(
+                handler => richTextBoxPrincipal.PreviewKeyDown += handler,
+                handler => richTextBoxPrincipal.PreviewKeyDown -= handler,
+                Scheduler.Default)
+                .Where(x => x.EventArgs.Key == Key.Back || x.EventArgs.Key == Key.Enter || x.EventArgs.Key == Key.Left);
+
+            var subscriber = observable.Subscribe(x => RichTextBoxPreviewKeyDown(x.EventArgs));
         }
 
-        private void RichTextBoxPreviewKeyDown(object sender, KeyEventArgs e)
+        private void RichTextBoxPreviewKeyDown(KeyEventArgs e)
         {
+            var start = richTextBoxPrincipal.CaretPosition;
+            var text = start.GetTextInRun(LogicalDirection.Backward);
             switch (e.Key)
             {
                 case Key.Back:
-                    {
-                        TextPointer start = richTextBoxPrincipal.CaretPosition;
-                        string text = start.GetTextInRun(LogicalDirection.Backward);
-                        if (text == _currentDirectory)
-                            e.Handled = true;
-                    }
+                    if (text == _currentDirectory)
+                        e.Handled = true;
                     break;
                 case Key.Enter:
                     string currentCode = richTextBoxPrincipal.CaretPosition.GetTextInRun(LogicalDirection.Backward);
@@ -61,12 +62,8 @@ namespace Interactivecs
                     e.Handled = true;
                     break;
                 case Key.Left:
-                    {
-                        TextPointer start = richTextBoxPrincipal.CaretPosition;
-                        string text = start.GetTextInRun(LogicalDirection.Backward);
-                        if (text == _currentDirectory || text == string.Empty)
-                            e.Handled = true;
-                    }
+                    if (text == _currentDirectory || text == string.Empty)
+                        e.Handled = true;
                     break;
             }
         }
@@ -79,8 +76,7 @@ namespace Interactivecs
             }
             catch (CompilationErrorException errorException)
             {
-                var run = new Run(errorException.Message);
-                run.Foreground = new SolidColorBrush(Colors.Red);
+                var run = new Run(errorException.Message) { Foreground = new SolidColorBrush(Colors.Red) };
                 _flowDocument.Blocks.Add(new Paragraph(run));
             }
             if (_result == null)

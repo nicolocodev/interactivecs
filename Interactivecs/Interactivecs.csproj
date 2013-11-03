@@ -43,6 +43,9 @@
     <Reference Include="Roslyn.Services.Editor.CSharp, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Reactive.Core, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Interfaces, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Linq, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />

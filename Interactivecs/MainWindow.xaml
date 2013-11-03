@@ -17,7 +17,6 @@
                      FontSize="18"
                      FontFamily="Consolas"
                      x:Name="richTextBoxPrincipal"
-                     PreviewKeyDown="RichTextBoxPreviewKeyDown"
                      Cursor="None"/>
 
     </Grid>
